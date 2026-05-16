@@ -1,8 +1,0 @@
-name = "duit-tracker"
-compatibility_date = "2024-03-01"
-pages_build_output_dir = "dist"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "duit-tracker-db"
-database_id = "60843cf2-be0c-492b-84ee-0baf1238f574"
