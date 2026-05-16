@@ -34,7 +34,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-export default function Dashboard({ transactions, month, onDelete }) {
+export default function Dashboard({ transactions, month, onDelete, setPage }) {
   const monthTxs  = filterByMonth(transactions, month);
   const expenses  = monthTxs.filter((t) => t.type === 'expense');
   const incomes   = monthTxs.filter((t) => t.type === 'income');
@@ -170,7 +170,16 @@ export default function Dashboard({ transactions, month, onDelete }) {
 
       {/* Recent */}
       <div className="chart-card">
-        <div className="chart-title">🕐 Transaksi Terbaru</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <div className="chart-title" style={{ margin: 0 }}>🕐 Transaksi Terbaru</div>
+          <button 
+            onClick={() => setPage('add')}
+            className="btn-add" 
+            style={{ padding: '6px 12px', fontSize: 12, display: 'flex', alignItems: 'center', gap: 6 }}
+          >
+            ➕ Tambah
+          </button>
+        </div>
         {transactions.length === 0 ? (
           <div className="empty-state"><div className="empty-icon">📭</div><p>Belum ada transaksi</p></div>
         ) : (

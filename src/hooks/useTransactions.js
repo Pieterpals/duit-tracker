@@ -1,44 +1,78 @@
-import { useState, useCallback } from 'react';
-
-const STORAGE_KEY = 'duit_transactions';
-
-function load() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  } catch {
-    return [];
-  }
-}
-
-function save(txs) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(txs));
-}
+import { useState, useCallback, useEffect } from 'react';
 
 export function useTransactions() {
-  const [transactions, setTransactions] = useState(load);
+  const [transactions, setTransactions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const addTransaction = useCallback((tx) => {
-    const newTx = { ...tx, id: Date.now(), createdAt: new Date().toISOString() };
-    setTransactions((prev) => {
-      const next = [newTx, ...prev];
-      save(next);
-      return next;
-    });
-    return newTx;
+  // Fetch all transactions from the API
+  useEffect(() => {
+    async function fetchTransactions() {
+      try {
+        const res = await fetch('/api/transactions');
+        if (!res.ok) throw new Error('Failed to fetch transactions');
+        const data = await res.json();
+        setTransactions(data);
+      } catch (error) {
+        console.error("Error loading transactions:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    fetchTransactions();
   }, []);
 
-  const deleteTransaction = useCallback((id) => {
-    setTransactions((prev) => {
-      const next = prev.filter((t) => t.id !== id);
-      save(next);
-      return next;
-    });
+  const addTransaction = useCallback(async (tx) => {
+    try {
+      // Optimistic UI update
+      const tempId = Date.now().toString();
+      const optimisticTx = { ...tx, id: tempId, created_at: new Date().toISOString() };
+      setTransactions((prev) => [optimisticTx, ...prev]);
+
+      // Real API call
+      const res = await fetch('/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tx),
+      });
+      
+      if (!res.ok) throw new Error('Failed to save transaction');
+      
+      const savedTx = await res.json();
+      
+      // Replace the optimistic temp transaction with the real one from DB
+      setTransactions((prev) => prev.map(t => t.id === tempId ? savedTx : t));
+      return savedTx;
+    } catch (error) {
+      console.error("Error saving transaction:", error);
+      setTransactions((prev) => prev.filter(t => t.id !== tx.id));
+      alert("Gagal menyimpan ke database. Coba lagi.");
+    }
   }, []);
 
-  const clearAll = useCallback(() => {
-    setTransactions([]);
-    localStorage.removeItem(STORAGE_KEY);
+  const deleteTransaction = useCallback(async (id) => {
+    try {
+      // Optimistic delete
+      setTransactions((prev) => prev.filter((t) => t.id !== id));
+      
+      const res = await fetch(`/api/transactions/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to delete transaction');
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+      alert("Gagal menghapus dari database. Coba muat ulang halaman.");
+    }
   }, []);
 
-  return { transactions, addTransaction, deleteTransaction, clearAll };
+  const clearAll = useCallback(async () => {
+    try {
+      setTransactions([]);
+      const res = await fetch('/api/transactions', { method: 'DELETE' });
+      if (!res.ok) throw new Error('Failed to clear transactions');
+    } catch (error) {
+      console.error("Error clearing transactions:", error);
+      alert("Gagal menghapus semua data. Coba muat ulang halaman.");
+    }
+  }, []);
+
+  return { transactions, isLoading, addTransaction, deleteTransaction, clearAll };
 }

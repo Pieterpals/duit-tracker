@@ -7,7 +7,7 @@ const NAV = [
   { id: 'add',          icon: '➕', label: 'Tambah Entri'  },
 ];
 
-export default function Sidebar({ page, setPage, transactions, clearAll, month, setMonth }) {
+export default function Sidebar({ page, setPage, transactions, clearAll, month, setMonth, isOpen }) {
   const showToast = useToast();
   const monthTxs  = filterByMonth(transactions, month);
   const income    = sumAmount(monthTxs.filter((t) => t.type === 'income'));
@@ -35,7 +35,7 @@ export default function Sidebar({ page, setPage, transactions, clearAll, month, 
   }
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       {/* Logo */}
       <div className="logo">
         <div className="logo-icon">💰</div>
