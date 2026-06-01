@@ -8,7 +8,7 @@ export function useTransactions(userId) {
   useEffect(() => {
     async function fetchTransactions() {
       try {
-        const res = await fetch(`/api/transactions?user_id=${encodeURIComponent(userId)}`);
+        const res = await fetch(`/api/transactions`);
         if (!res.ok) throw new Error('Failed to fetch transactions');
         const data = await res.json();
         setTransactions(data);
@@ -66,7 +66,7 @@ export function useTransactions(userId) {
   const clearAll = useCallback(async () => {
     try {
       setTransactions([]);
-      const res = await fetch(`/api/transactions?user_id=${encodeURIComponent(userId)}`, { method: 'DELETE' });
+      const res = await fetch(`/api/transactions`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Failed to clear transactions');
     } catch (error) {
       console.error("Error clearing transactions:", error);
