@@ -1,5 +1,6 @@
 import { filterByMonth, sumAmount, formatRupiah, exportToCSV } from '../utils/format';
 import { useToast } from '../hooks/useToast';
+import { useAuth } from '../hooks/useAuth';
 
 const NAV = [
   { id: 'dashboard',    icon: '📊', label: 'Dashboard'    },
@@ -9,6 +10,7 @@ const NAV = [
 
 export default function Sidebar({ page, setPage, transactions, clearAll, month, setMonth, isOpen }) {
   const showToast = useToast();
+  const { user, logout } = useAuth();
   const monthTxs  = filterByMonth(transactions, month);
   const income    = sumAmount(monthTxs.filter((t) => t.type === 'income'));
   const expense   = sumAmount(monthTxs.filter((t) => t.type === 'expense'));
@@ -34,6 +36,14 @@ export default function Sidebar({ page, setPage, transactions, clearAll, month, 
     showToast('🗑 Semua data dihapus', 'error');
   }
 
+  function handleLogout() {
+    if (!confirm('Yakin ingin logout?')) return;
+    logout();
+  }
+
+  const avatarInitial = user?.name?.charAt(0).toUpperCase() || '?';
+  const isRicky = user?.id === 'ricky';
+
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       {/* Logo */}
@@ -42,6 +52,17 @@ export default function Sidebar({ page, setPage, transactions, clearAll, month, 
         <div>
           <div className="logo-text">DuitTracker</div>
           <div className="logo-sub">Andrea &amp; Ricky</div>
+        </div>
+      </div>
+
+      {/* User card */}
+      <div className="user-card">
+        <div className={`user-avatar ${isRicky ? 'avatar-ricky' : 'avatar-andrea'}`}>
+          {avatarInitial}
+        </div>
+        <div className="user-info">
+          <div className="user-name">Halo, {user?.name}! 👋</div>
+          <div className="user-role">Personal Tracker</div>
         </div>
       </div>
 
@@ -81,6 +102,9 @@ export default function Sidebar({ page, setPage, transactions, clearAll, month, 
         </button>
         <button className="nav-item danger" onClick={handleClear}>
           <span className="nav-icon">🗑</span> Hapus Semua
+        </button>
+        <button className="nav-item logout" onClick={handleLogout}>
+          <span className="nav-icon">🚪</span> Logout
         </button>
       </div>
     </aside>

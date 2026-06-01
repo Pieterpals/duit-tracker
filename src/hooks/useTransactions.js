@@ -1,14 +1,14 @@
 import { useState, useCallback, useEffect } from 'react';
 
-export function useTransactions() {
+export function useTransactions(userId) {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch all transactions from the API
+  // Fetch all transactions from the API, filtered by user
   useEffect(() => {
     async function fetchTransactions() {
       try {
-        const res = await fetch('/api/transactions');
+        const res = await fetch(`/api/transactions?user_id=${encodeURIComponent(userId)}`);
         if (!res.ok) throw new Error('Failed to fetch transactions');
         const data = await res.json();
         setTransactions(data);
@@ -19,21 +19,21 @@ export function useTransactions() {
       }
     }
     
-    fetchTransactions();
-  }, []);
+    if (userId) fetchTransactions();
+  }, [userId]);
 
   const addTransaction = useCallback(async (tx) => {
     try {
       // Optimistic UI update
       const tempId = Date.now().toString();
-      const optimisticTx = { ...tx, id: tempId, created_at: new Date().toISOString() };
+      const optimisticTx = { ...tx, id: tempId, user_id: userId, created_at: new Date().toISOString() };
       setTransactions((prev) => [optimisticTx, ...prev]);
 
       // Real API call
       const res = await fetch('/api/transactions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(tx),
+        body: JSON.stringify({ ...tx, user_id: userId }),
       });
       
       if (!res.ok) throw new Error('Failed to save transaction');
@@ -48,7 +48,7 @@ export function useTransactions() {
       setTransactions((prev) => prev.filter(t => t.id !== tx.id));
       alert("Gagal menyimpan ke database. Coba lagi.");
     }
-  }, []);
+  }, [userId]);
 
   const deleteTransaction = useCallback(async (id) => {
     try {
@@ -66,13 +66,13 @@ export function useTransactions() {
   const clearAll = useCallback(async () => {
     try {
       setTransactions([]);
-      const res = await fetch('/api/transactions', { method: 'DELETE' });
+      const res = await fetch(`/api/transactions?user_id=${encodeURIComponent(userId)}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Failed to clear transactions');
     } catch (error) {
       console.error("Error clearing transactions:", error);
       alert("Gagal menghapus semua data. Coba muat ulang halaman.");
     }
-  }, []);
+  }, [userId]);
 
   return { transactions, isLoading, addTransaction, deleteTransaction, clearAll };
 }

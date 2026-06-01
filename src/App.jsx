@@ -1,16 +1,19 @@
 import { useState }         from 'react';
+import { AuthProvider, useAuth } from './hooks/useAuth';
 import { ToastProvider }    from './hooks/useToast';
 import { useTransactions }  from './hooks/useTransactions';
 import Sidebar              from './components/Sidebar';
 import Dashboard            from './pages/Dashboard';
 import Transactions         from './pages/Transactions';
 import AddTransaction       from './pages/AddTransaction';
+import Login                from './pages/Login';
 
-export default function App() {
+function AuthenticatedApp() {
+  const { user } = useAuth();
   const [page,  setPage]  = useState('dashboard');
   const [month, setMonth] = useState(() => { const d = new Date(); d.setDate(1); return d; });
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { transactions, addTransaction, deleteTransaction, clearAll } = useTransactions();
+  const { transactions, addTransaction, deleteTransaction, clearAll } = useTransactions(user.id);
 
   function handleAdd(tx) {
     addTransaction(tx);
@@ -67,4 +70,17 @@ export default function App() {
       </div>
     </ToastProvider>
   );
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  );
+}
+
+function AppRouter() {
+  const { isLoggedIn } = useAuth();
+  return isLoggedIn ? <AuthenticatedApp /> : <Login />;
 }
