@@ -13,7 +13,10 @@ function AuthenticatedApp() {
   const [page,  setPage]  = useState('dashboard');
   const [month, setMonth] = useState(() => { const d = new Date(); d.setDate(1); return d; });
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userFilter, setUserFilter] = useState('all');
   const { transactions, addTransaction, deleteTransaction, clearAll } = useTransactions(user.id);
+
+  const filteredTransactions = transactions.filter(t => userFilter === 'all' || t.user_id === userFilter);
 
   function handleAdd(tx) {
     addTransaction(tx);
@@ -38,11 +41,13 @@ function AuthenticatedApp() {
         <Sidebar
           page={page}
           setPage={(p) => { setPage(p); setSidebarOpen(false); }}
-          transactions={transactions}
+          transactions={filteredTransactions}
           clearAll={clearAll}
           month={month}
           setMonth={setMonth}
           isOpen={sidebarOpen}
+          userFilter={userFilter}
+          setUserFilter={setUserFilter}
         />
         
         {/* Overlay for mobile sidebar */}
@@ -62,8 +67,8 @@ function AuthenticatedApp() {
           </div>
 
           <div>
-            {page === 'dashboard'    && <Dashboard    transactions={transactions} month={month} onDelete={handleDelete} setPage={setPage} />}
-            {page === 'transactions' && <Transactions transactions={transactions} month={month} onDelete={handleDelete} />}
+            {page === 'dashboard'    && <Dashboard    transactions={filteredTransactions} month={month} onDelete={handleDelete} setPage={setPage} />}
+            {page === 'transactions' && <Transactions transactions={filteredTransactions} month={month} onDelete={handleDelete} />}
             {page === 'add'          && <AddTransaction onAdd={handleAdd} />}
           </div>
         </main>

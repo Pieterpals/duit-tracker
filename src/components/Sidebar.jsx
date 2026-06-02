@@ -8,7 +8,7 @@ const NAV = [
   { id: 'add',          icon: '➕', label: 'Tambah Entri'  },
 ];
 
-export default function Sidebar({ page, setPage, transactions, clearAll, month, setMonth, isOpen }) {
+export default function Sidebar({ page, setPage, transactions, clearAll, month, setMonth, isOpen, userFilter, setUserFilter }) {
   const showToast = useToast();
   const { user, logout } = useAuth();
   const monthTxs  = filterByMonth(transactions, month);
@@ -93,6 +93,21 @@ export default function Sidebar({ page, setPage, transactions, clearAll, month, 
           {month.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}
         </div>
         <button onClick={() => changeMonth(1)}>›</button>
+      </div>
+
+      {/* User Filter */}
+      <div className="nav-label" style={{ marginTop: 8 }}>Filter Pengguna</div>
+      <div className="month-nav" style={{ padding: '0 4px' }}>
+        <select 
+          className="form-select" 
+          value={userFilter} 
+          onChange={(e) => setUserFilter(e.target.value)}
+          style={{ width: '100%', padding: '6px 10px', fontSize: 13 }}
+        >
+          <option value="all">Semua Pengguna</option>
+          <option value="ricky">Ricky</option>
+          <option value="andrea">Andrea</option>
+        </select>
       </div>
 
       {/* Actions */}

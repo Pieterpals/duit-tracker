@@ -76,21 +76,21 @@ Expense Category	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23	24	
 																															
 May 2026																															
 Expense Category	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23	24	25	26	27	28	29	30	31
- 01 Makan dan Minum		 Rp982.600 	 Rp130.000 	 Rp213.000 	 Rp104.000 	 Rp88.000 	 Rp90.000 	 Rp110.000 	 Rp132.000 	 Rp49.000 		 Rp41.000 	 Rp12.000 	 Rp185.000 	 Rp173.000 	 Rp133.000 															
- 02 Transport		 Rp64.000 		 Rp76.500 	 Rp34.500 	 Rp74.500 	 Rp58.500 	 Rp102.500 	 Rp93.000 	 Rp57.500 	 Rp67.500 	 Rp44.500 	 Rp59.000 	 Rp54.500 		 Rp47.000 		 Rp80.000 	 Rp80.000 	 Rp80.000 	 Rp80.000 	 Rp90.000 			 Rp90.000 	 Rp90.000 	 Rp90.000 	 Rp90.000 	 Rp90.000 		
- 03 Pulsa, Apartement, Parkir																															
- 04 Shopee		 Rp164.000 		 Rp114.000 	 Rp2.612.390 								 Rp164.000 	 Rp530.000 																	
+ 01 Makan dan Minum		 Rp 982,600 	 Rp 130,000 	 Rp 213,000 	 Rp 104,000 	 Rp 88,000 	 Rp 90,000 	 Rp 110,000 	 Rp 132,000 	 Rp 49,000 		 Rp 41,000 	 Rp 12,000 	 Rp 185,000 	 Rp 173,000 	 Rp 133,000 	 Rp 218,000 	 Rp 138,000 	 Rp 114,000 	 Rp 60,000 	 Rp 78,500 	 Rp 131,500 		 Rp 301,200 	 Rp 33,000 	 Rp 13,000 	 Rp 246,500 	 Rp 145,000 	 Rp 44,000 	 Rp 425,000 	 Rp 141,000 
+ 02 Transport		 Rp 64,000 		 Rp 76,500 	 Rp 34,500 	 Rp 74,500 	 Rp 58,500 	 Rp 102,500 	 Rp 93,000 	 Rp 57,500 	 Rp 67,500 	 Rp 44,500 	 Rp 59,000 	 Rp 54,500 		 Rp 47,000 	 Rp 39,000 	 Rp 42,000 	 Rp 64,500 	 Rp 67,500 	 Rp 84,000 	 Rp 109,000 	 Rp 59,500 		 Rp 77,000 	 Rp 115,000 		 Rp 65,500 	 Rp 57,500 		
+ 03 Pulsa, Apartement, Parkir																			 Rp 100,000 				 Rp 98,000 								
+ 04 Shopee		 Rp 164,000 		 Rp 114,000 	 Rp 2,612,390 								 Rp 164,000 	 Rp 251,000 				 Rp 47,000 						 Rp 137,200 	 Rp 441,000 	 Rp 105,000 					
  05 Listrik & PDAM																															
- 06 Untuk Orang Tua		 Rp100.000 																													
- 07 Persembahan			 Rp200.000 							 Rp200.000 							 Rp200.000 							 Rp200.000 							 Rp200.000 
+ 06 Untuk Orang Tua		 Rp 100,000 																													
+ 07 Persembahan			 Rp 200,000 							 Rp 200,000 							 Rp 200,000 							 Rp 200,000 							 Rp 200,000 
  08 Kado																															
- 09 Olah raga						 Rp16.000 		 Rp116.500 	 Rp298.000 			 Rp595.500 			 Rp97.000 	 Rp150.000 															
- 10 Expense X									 Rp70.000 						 Rp575.000 																
- 11 Expense X																															
+ 09 Olah raga						 Rp 16,000 		 Rp 116,500 	 Rp 298,000 			 Rp 595,500 			 Rp 97,000 	 Rp 150,000 		 Rp 390,000 	 Rp 300,000 				 Rp 57,000 					 Rp 148,000 			
+ 10 Expense X									 Rp 70,000 						 Rp 575,000 												 Rp 445,500 	 Rp 314,000 		 Rp 65,000 	 Rp 80,000 
+ 11 Expense X																															 Rp 176,000 
  13 Expense X																															
 																															
- Total Daily	 Rp- 	 Rp1.310.600 	 Rp330.000 	 Rp403.500 	 Rp2.750.890 	 Rp178.500 	 Rp148.500 	 Rp329.000 	 Rp593.000 	 Rp306.500 	 Rp67.500 	 Rp681.000 	 Rp235.000 	 Rp769.500 	 Rp845.000 	 Rp330.000 	 Rp200.000 	 Rp80.000 	 Rp80.000 	 Rp80.000 	 Rp80.000 	 Rp90.000 	 Rp- 	 Rp200.000 	 Rp90.000 	 Rp90.000 	 Rp90.000 	 Rp90.000 	 Rp90.000 	 Rp- 	 Rp200.000 
- Monthly expense Total	 Rp10.738.490 
+ Total Daily	 Rp - 	 Rp 1,310,600 	 Rp 330,000 	 Rp 403,500 	 Rp 2,750,890 	 Rp 178,500 	 Rp 148,500 	 Rp 329,000 	 Rp 593,000 	 Rp 306,500 	 Rp 67,500 	 Rp 681,000 	 Rp 235,000 	 Rp 490,500 	 Rp 845,000 	 Rp 330,000 	 Rp 457,000 	 Rp 617,000 	 Rp 578,500 	 Rp 127,500 	 Rp 162,500 	 Rp 240,500 	 Rp 214,500 	 Rp 638,400 	 Rp 551,000 	 Rp 233,000 	 Rp 692,000 	 Rp 672,500 	 Rp 101,500 	 Rp 490,000 	 Rp 597,000 
+ Monthly expense Total	 Rp 15,372,390 
 `;
 
 const monthMap = {
@@ -126,7 +126,7 @@ let sql = ""; // Remove BEGIN TRANSACTION
 
 function parseAmount(str) {
   if (!str || !str.trim()) return 0;
-  let s = str.replace(/Rp/g, '').replace(/\./g, '').trim();
+  let s = str.replace(/Rp/g, '').replace(/[.,]/g, '').trim();
   if (s === '-' || s === '') return 0;
   return parseInt(s, 10) || 0;
 }

@@ -1,0 +1,5 @@
+INSERT INTO "transactions" ("id","type","amount","category","date","note","created_at","user_id") VALUES('bc52da9a-4101-45c6-994b-548a1e50ae6d','expense',200000,'Persembahan','2026-06-07','','2026-05-23 16:26:52','ricky');
+INSERT INTO "transactions" ("id","type","amount","category","date","note","created_at","user_id") VALUES('2efc2a86-23cd-4fc5-8a31-391da57be365','expense',200000,'Persembahan','2026-06-14','','2026-05-23 16:27:33','ricky');
+INSERT INTO "transactions" ("id","type","amount","category","date","note","created_at","user_id") VALUES('07ced76e-c94e-4c39-b627-91f9b0963042','expense',200000,'Persembahan','2026-06-21','','2026-05-23 16:28:04','ricky');
+INSERT INTO "transactions" ("id","type","amount","category","date","note","created_at","user_id") VALUES('a46ba082-cf54-40ad-bb8c-ad5bc10ab7a7','expense',200000,'Persembahan','2026-06-28','','2026-05-23 16:29:42','ricky');
+INSERT INTO "transactions" ("id","type","amount","category","date","note","created_at","user_id") VALUES('2d0e588b-5e84-45f0-86d6-d8bd68e02f9b','expense',398000,'Olahraga','2026-06-01','Tennis','2026-05-31 04:55:32','ricky');
