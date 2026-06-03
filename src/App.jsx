@@ -67,8 +67,8 @@ function AuthenticatedApp() {
           </div>
 
           <div>
-            {page === 'dashboard'    && <Dashboard    transactions={filteredTransactions} month={month} onDelete={handleDelete} setPage={setPage} />}
-            {page === 'transactions' && <Transactions transactions={filteredTransactions} month={month} onDelete={handleDelete} />}
+            {page === 'dashboard'    && <Dashboard    transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} setPage={setPage} userFilter={userFilter} setUserFilter={setUserFilter} />}
+            {page === 'transactions' && <Transactions transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} userFilter={userFilter} setUserFilter={setUserFilter} />}
             {page === 'add'          && <AddTransaction onAdd={handleAdd} />}
           </div>
         </main>

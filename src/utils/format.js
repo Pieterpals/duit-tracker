@@ -60,9 +60,9 @@ export function groupByDay(txs, days = 7) {
 }
 
 export function exportToCSV(transactions) {
-  const rows = [['Tanggal', 'Tipe', 'Kategori', 'Jumlah', 'Catatan']];
+  const rows = [['Tanggal', 'Pengguna', 'Tipe', 'Kategori', 'Jumlah', 'Catatan']];
   transactions.forEach((t) =>
-    rows.push([t.date, t.type, t.category, t.amount, t.note || ''])
+    rows.push([t.date, t.user_id || '-', t.type, t.category, t.amount, t.note || ''])
   );
   const csv = rows
     .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { filterByMonth } from '../utils/format';
+import { filterByMonth, exportToCSV } from '../utils/format';
 import TransactionItem from '../components/TransactionItem';
 
-export default function Transactions({ transactions, month, onDelete }) {
+export default function Transactions({ transactions, allTransactions, month, onDelete, userFilter, setUserFilter }) {
   const [typeFilter, setTypeFilter] = useState('all');
   const [search, setSearch]         = useState('');
 
@@ -16,10 +16,34 @@ export default function Transactions({ transactions, month, onDelete }) {
 
   return (
     <div>
-      <div className="page-header">
+      <div className="page-header" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
         <div>
           <div className="page-title">Semua Transaksi</div>
           <div className="page-date">{filtered.length} transaksi</div>
+        </div>
+
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <select 
+            className="form-select" 
+            value={userFilter} 
+            onChange={(e) => setUserFilter(e.target.value)}
+            style={{ width: '160px', padding: '8px 12px', fontSize: '13px' }}
+          >
+            <option value="all">Semua Pengguna</option>
+            <option value="ricky">Ricky</option>
+            <option value="andrea">Andrea</option>
+          </select>
+
+          <button 
+            className="btn-add" 
+            style={{ background: 'var(--teal)', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '6px' }}
+            onClick={() => {
+              if (!allTransactions.length) return alert('Tidak ada data');
+              exportToCSV(allTransactions);
+            }}
+          >
+            ⬇ Export Semua
+          </button>
         </div>
       </div>
 

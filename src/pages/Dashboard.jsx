@@ -34,7 +34,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-export default function Dashboard({ transactions, month, onDelete, setPage }) {
+export default function Dashboard({ transactions, allTransactions, month, onDelete, setPage, userFilter, setUserFilter }) {
   const monthTxs  = filterByMonth(transactions, month);
   const expenses  = monthTxs.filter((t) => t.type === 'expense');
   const incomes   = monthTxs.filter((t) => t.type === 'income');
@@ -48,12 +48,25 @@ export default function Dashboard({ transactions, month, onDelete, setPage }) {
 
   return (
     <div>
-      <div className="page-header">
+      <div className="page-header" style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
         <div>
           <div className="page-title">Dashboard</div>
           <div className="page-date">
             {new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </div>
+        </div>
+        
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <select 
+            className="form-select" 
+            value={userFilter} 
+            onChange={(e) => setUserFilter(e.target.value)}
+            style={{ width: '160px', padding: '8px 12px', fontSize: '13px' }}
+          >
+            <option value="all">Semua Pengguna</option>
+            <option value="ricky">Ricky</option>
+            <option value="andrea">Andrea</option>
+          </select>
         </div>
       </div>
 
