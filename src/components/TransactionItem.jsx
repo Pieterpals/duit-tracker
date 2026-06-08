@@ -12,7 +12,7 @@ export default function TransactionItem({ tx, onDelete }) {
       </div>
       <div className="tx-info">
         <div className="tx-cat">
-          {tx.category}
+          <span className="category-name" title={tx.category}>{tx.category}</span>
           <span className={`tag ${tx.type}`}>{isExpense ? 'keluar' : 'masuk'}</span>
           <span className="tag" style={{ 
             background: tx.user_id === 'andrea' ? 'var(--pink)' : 'var(--accent)', 
