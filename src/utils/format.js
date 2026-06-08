@@ -75,3 +75,45 @@ export function exportToCSV(transactions) {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+export function filterByUser(transactions, userId) {
+  if (!userId || userId === 'all') return transactions;
+  return transactions.filter((t) => t.user_id === userId);
+}
+
+export function groupByCategoryForUsers(transactions, month) {
+  const monthTxs = filterByMonth(transactions, month).filter(t => t.type === 'expense');
+  const catMap = {};
+
+  monthTxs.forEach((t) => {
+    if (!catMap[t.category]) catMap[t.category] = { category: t.category, ricky: 0, andrea: 0 };
+    if (t.user_id === 'ricky') catMap[t.category].ricky += t.amount;
+    else if (t.user_id === 'andrea') catMap[t.category].andrea += t.amount;
+  });
+
+  return Object.values(catMap).sort((a, b) => (b.ricky + b.andrea) - (a.ricky + a.andrea));
+}
+
+export function getMonthLabel(date) {
+  return date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+}
+
+export function groupByDayForMonth(transactions, month) {
+  const year = month.getFullYear();
+  const m = month.getMonth();
+  const daysInMonth = new Date(year, m + 1, 0).getDate();
+  const result = [];
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const ds = `${year}-${String(m + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const label = `${day}`;
+    const dayTxs = transactions.filter((t) => t.date === ds);
+    result.push({
+      label,
+      expense: sumAmount(dayTxs.filter((t) => t.type === 'expense')),
+      income: sumAmount(dayTxs.filter((t) => t.type === 'income')),
+    });
+  }
+  return result;
+}
+

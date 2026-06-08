@@ -3,9 +3,11 @@ import { useToast } from '../hooks/useToast';
 import { useAuth } from '../hooks/useAuth';
 
 const NAV = [
-  { id: 'dashboard',    icon: '📊', label: 'Dashboard'    },
-  { id: 'transactions', icon: '📋', label: 'Transaksi'    },
-  { id: 'add',          icon: '➕', label: 'Tambah Entri'  },
+  { id: 'dashboard',        icon: '📊', label: 'Dashboard'     },
+  { id: 'transactions',     icon: '📋', label: 'Transaksi'     },
+  { id: 'all-transactions', icon: '📑', label: 'Semua Data'    },
+  { id: 'compare',          icon: '⚖️', label: 'Perbandingan'  },
+  { id: 'add',              icon: '➕', label: 'Tambah Entri'   },
 ];
 
 export default function Sidebar({ page, setPage, transactions, clearAll, month, setMonth, isOpen }) {

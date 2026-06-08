@@ -50,6 +50,39 @@ export function useTransactions(userId) {
     }
   }, [userId]);
 
+  const updateTransaction = useCallback(async (id, updatedFields) => {
+    let oldTx;
+    try {
+      // Optimistic update
+      setTransactions((prev) => prev.map(t => {
+        if (t.id === id) {
+          oldTx = { ...t };
+          return { ...t, ...updatedFields };
+        }
+        return t;
+      }));
+
+      const res = await fetch(`/api/transactions/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedFields),
+      });
+
+      if (!res.ok) throw new Error('Failed to update transaction');
+
+      const savedTx = await res.json();
+      setTransactions((prev) => prev.map(t => t.id === id ? savedTx : t));
+      return savedTx;
+    } catch (error) {
+      console.error("Error updating transaction:", error);
+      // Rollback
+      if (oldTx) {
+        setTransactions((prev) => prev.map(t => t.id === id ? oldTx : t));
+      }
+      alert("Gagal memperbarui transaksi. Coba lagi.");
+    }
+  }, []);
+
   const deleteTransaction = useCallback(async (id) => {
     try {
       // Optimistic delete
@@ -74,5 +107,5 @@ export function useTransactions(userId) {
     }
   }, [userId]);
 
-  return { transactions, isLoading, addTransaction, deleteTransaction, clearAll };
+  return { transactions, isLoading, addTransaction, updateTransaction, deleteTransaction, clearAll };
 }

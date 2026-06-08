@@ -6,6 +6,8 @@ import Sidebar              from './components/Sidebar';
 import Dashboard            from './pages/Dashboard';
 import Transactions         from './pages/Transactions';
 import AddTransaction       from './pages/AddTransaction';
+import AllTransactions      from './pages/AllTransactions';
+import Compare              from './pages/Compare';
 import Login                from './pages/Login';
 
 function AuthenticatedApp() {
@@ -14,7 +16,7 @@ function AuthenticatedApp() {
   const [month, setMonth] = useState(() => { const d = new Date(); d.setDate(1); return d; });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userFilter, setUserFilter] = useState('all');
-  const { transactions, addTransaction, deleteTransaction, clearAll } = useTransactions(user.id);
+  const { transactions, addTransaction, updateTransaction, deleteTransaction, clearAll } = useTransactions(user.id);
 
   const filteredTransactions = transactions.filter(t => userFilter === 'all' || t.user_id === userFilter);
 
@@ -31,6 +33,8 @@ function AuthenticatedApp() {
   function getPageTitle() {
     if (page === 'dashboard') return 'Dashboard';
     if (page === 'transactions') return 'Transaksi';
+    if (page === 'all-transactions') return 'Semua Data';
+    if (page === 'compare') return 'Perbandingan';
     if (page === 'add') return 'Tambah Entri';
     return 'DuitTracker';
   }
@@ -67,9 +71,11 @@ function AuthenticatedApp() {
           </div>
 
           <div>
-            {page === 'dashboard'    && <Dashboard    transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} setPage={setPage} userFilter={userFilter} setUserFilter={setUserFilter} />}
-            {page === 'transactions' && <Transactions transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} userFilter={userFilter} setUserFilter={setUserFilter} />}
-            {page === 'add'          && <AddTransaction onAdd={handleAdd} />}
+            {page === 'dashboard'        && <Dashboard    transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} setPage={setPage} userFilter={userFilter} setUserFilter={setUserFilter} />}
+            {page === 'transactions'     && <Transactions transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} userFilter={userFilter} setUserFilter={setUserFilter} />}
+            {page === 'all-transactions' && <AllTransactions transactions={filteredTransactions} onDelete={handleDelete} onUpdate={updateTransaction} userFilter={userFilter} setUserFilter={setUserFilter} />}
+            {page === 'compare'          && <Compare transactions={transactions} />}
+            {page === 'add'              && <AddTransaction onAdd={handleAdd} />}
           </div>
         </main>
       </div>
