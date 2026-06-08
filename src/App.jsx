@@ -70,7 +70,7 @@ function AuthenticatedApp() {
             <div style={{ width: 24 }}></div> {/* Spacer for balance */}
           </div>
 
-          <div>
+          <div className="page-content">
             {page === 'dashboard'        && <Dashboard    transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} setPage={setPage} userFilter={userFilter} setUserFilter={setUserFilter} />}
             {page === 'transactions'     && <Transactions transactions={filteredTransactions} allTransactions={transactions} month={month} onDelete={handleDelete} userFilter={userFilter} setUserFilter={setUserFilter} />}
             {page === 'all-transactions' && <AllTransactions transactions={filteredTransactions} onDelete={handleDelete} onUpdate={updateTransaction} userFilter={userFilter} setUserFilter={setUserFilter} />}

@@ -873,7 +873,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 @media(max-width: 900px) {
   .app { grid-template-columns: 1fr; }
   .main { padding: 0; }
-  .main > div { padding: 20px; padding-top: 8px; }
+  .page-content { padding: 20px; padding-bottom: 40px; }
 
   .sidebar {
     position: fixed;
@@ -925,16 +925,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     font-weight: 600;
   }
 
-  /* On mobile, show page header but stacked */
-  .page-header {
-    flex-direction: column;
-    align-items: flex-start !important;
-    gap: 12px;
-  }
-  .page-header > div:last-child {
-    margin-left: 0 !important;
-    width: 100%;
-  }
+  /* Hide page-header on mobile — mobile-header replaces the title */
+  .page-header { display: none; }
 
   .charts-grid { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr 1fr; }
@@ -962,9 +954,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
 @media(max-width: 480px) {
   .form-grid { grid-template-columns: 1fr; }
-  .main > div { padding: 16px; padding-top: 8px; }
+  .page-content { padding: 16px; padding-bottom: 40px; }
   .summary-grid { grid-template-columns: 1fr; }
   .page-title { font-size: 20px; }
   .compare-amount { font-size: 15px; }
   .compare-month-amount { font-size: 18px; }
 }
+
